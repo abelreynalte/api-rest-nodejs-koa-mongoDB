@@ -5,7 +5,7 @@ Node.js + Koa.js + Mongoose + EsLint
 </h4>
 
 <div align="center">
-    <img src="images/nodejs-rest-api.png"  width="100%">
+    <img src="src/assets/images/nodejs-rest-api.png"  width="100%">
 </div>
 
 ## Tabla de Contenido
