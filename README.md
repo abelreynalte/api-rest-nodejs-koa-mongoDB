@@ -28,7 +28,7 @@ Nuestra api de ejemplo es muy simple, expondrá algunos métodos para poder cons
 ## Ciclo de Vida de las Solicitudes HTTP en nuestra API
 Cada vez que un usuario realiza una petición por ejemplo a http://localhost:3000/person ya sea que realiza un GET o un POST (con los parámetros adecuados), nuestra aplicación escucha a través de los enrutamientos (routes) que hemos definido y esto dispara todo el flujo de invocaciónes necesarias para finalzar el procesamiento de cada solicitud. En la siguiente imagen se muestra como es el flujo de la petición que pasa entre los elemntos más importantes de nuestra api.
 
-![Ciclo de vida de cada solicitud http](images/ciclo-vida-solicitud-http-api.png)
+![Ciclo de vida de cada solicitud http](src/assets/images/ciclo-vida-solicitud-http-api.png)
 
 ## Requisitos
 Antes de empezar revisa ue cumplas con los siguientes requisitos:
@@ -93,17 +93,3 @@ En cada episodio iremos complementando nuestro proyecto.
         |   |-- person.schema.js
         |-- utils
 ```
-
-/* APUNTES:
-https://github.com/jriverox/api-rest-nodejs-workshop-documentation
-Van a dar certificado.
-Cualquier pregunta por el workplace.
-
-Para debuguear: pluging
-
-Tarea:
-Reto: Implementar un endpoint que permita buscar aquellas personas mediante varios parametros (al menos 3) 
-por color de ojos (eyeColor), país (country), genero (gender). Puedes recibir los parametros via params, 
-query string o body (post). Mejor si el resultado es paginado.
-*/
-//MONGODB_URL: "mongodb+srv://developer:Belcorp2020@cluster0-8hxu4.mongodb.net/contacts?retryWrites=true&w=majority"
