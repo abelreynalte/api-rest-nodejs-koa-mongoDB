@@ -47,10 +47,10 @@ Antes de empezar revisa ue cumplas con los siguientes requisitos:
 ## Listado de Episodios del Curso
 En cada episodio iremos complementando nuestro proyecto.
 
-- [Episodio 1: Creando mi primera API rest en Node.js y MongoDB](episodes/README-episode-1.MD)
-- [Episodio 2: Implementando validaciones de request y mejores prácticas de manejo de errores](episodes/README-episode-2.MD)
-- [Episodio 3: Documentando y probando nuestra api](episodes/README-episode-3.MD)
-- [Episodio 4: Desplegando nuestra api en la nube](episodes/README-episode-4.MD)
+- [Episodio 1: Creando mi primera API rest en Node.js y MongoDB](src/assets/episodes/README-episode-1.MD)
+- [Episodio 2: Implementando validaciones de request y mejores prácticas de manejo de errores](src/assets/episodes/README-episode-2.MD)
+- [Episodio 3: Documentando y probando nuestra api](src/assets/episodes/README-episode-3.MD)
+- [Episodio 4: Desplegando nuestra api en la nube](src/assets/episodes/README-episode-4.MD)
 
 ## Stack
 - [Koa](https://github.com/koajs/koa) - Middleware para node.js la cual usa funciones asincronas ES2017. Esta librería esta hecha por el equipo de express, y es más ligera que express.
