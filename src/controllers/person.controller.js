@@ -52,7 +52,7 @@ module.exports = class PersonController {
     const { page, pageSize } = ctx.query
     const options = {
       page: parseInt(page, 10) || 1,
-      limit: parseInt(pageSize, 10) || 1,
+      limit: parseInt(pageSize, 10) || 10,
     }
 
     try {
