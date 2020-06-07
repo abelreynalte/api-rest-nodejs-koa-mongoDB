@@ -3,6 +3,9 @@
  * Responsable por recibir las solicitudes http desde el router person.route.js
  */
 const PersonRepository = require('../repositories/person.repository')
+// LINEA AGREGADA: reemplazaremos los ctx.throw por throw errorFactory.
+const errorFactory = require('../utils/logging/error-factory')
+
 const repository = new PersonRepository()
 
 module.exports = class PersonController {
@@ -13,16 +16,13 @@ module.exports = class PersonController {
    */
   async getByIndex(ctx) {
     const index = ctx.params.index && !isNaN(ctx.params.index) ? parseInt(ctx.params.index) : 0
-    if (index > 0) {
-      const filter = { index: index }
-      const data = await repository.findOne(filter)
-      if (data) {
-        ctx.body = data
-      } else {
-        ctx.throw(404, `No se ha encontrado la persona con el indice ${index}`)
-      }
+    const filter = { index: index }
+    const data = await repository.findOne(filter)
+    if (data) {
+      ctx.body = data
     } else {
-      ctx.throw(422, `Valor ${ctx.params.index} no soportado`)
+      // LINEA AGREGADA: Manejamos los errores operacionales usando nuestra fabrica de errores
+      throw errorFactory.NotFoundError(`No se ha encontrado la persona con el indice ${index}`)
     }
   }
 
@@ -42,25 +42,25 @@ module.exports = class PersonController {
    * @param {object} ctx: contexto de koa que contiene los parameteros de la solicitud, en este caso desde el body,
    * obtendremos las propiedades de la persona a guardar a traves de ctx.request.body
    */
-  async getByeyeColorCountryGender(ctx) {
-    const filter = {
-      eyeColor: ctx.params.eyeColor,
-      country: ctx.params.country,
-      gender: ctx.params.gender,
-    }
+  async getByQuery(ctx) {
+    const filter = Object.assign({}, ctx.query)
+    if (ctx.query.page) delete filter.page
+    if (ctx.query.pageSize) delete filter.pageSize
 
-    const { page, pageSize } = ctx.query
     const options = {
-      page: parseInt(page, 10) || 1,
-      limit: parseInt(pageSize, 10) || 10,
+      page: ctx.query.page && !isNaN(ctx.query.page) ? parseInt(ctx.query.page) : 1,
+      limit: ctx.query.pageSize && !isNaN(ctx.query.pageSize) ? parseInt(ctx.query.pageSize) : 10,
     }
 
-    try {
-      ctx.body = await repository.paginationByeyeColorCountryGender(filter, options)
-    } catch (err) {
-      ctx.status = err.status || 500
-      ctx.body = err.message
-      ctx.app.emit('error', err, ctx)
+    const data = await repository.getByQuery(filter, options)
+    if (data) {
+      ctx.body = data
+    } else {
+      // LINEA AGREGADA: Manejamos los errores operacionales usando nuestra fabrica de errores
+      throw errorFactory.NotFoundError(
+        `No se ha encontrado personas que cumplan son el query ${JSON.stringify(ctx.query)}`,
+      )
     }
+    ctx.body = data
   }
 }

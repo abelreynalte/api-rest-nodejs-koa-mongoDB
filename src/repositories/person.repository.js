@@ -33,7 +33,7 @@ module.exports = class PersonRepository {
     return await PersonModel.find(filter)
   }
 
-  async paginationByeyeColorCountryGender(filter, options) {
+  async getByQuery(filter, options) {
     return await PersonModel.paginate(filter, options)
   }
 }
